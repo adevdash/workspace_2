@@ -1,0 +1,20 @@
+<div>
+  <p>###</p>
+  <p>
+    <a href="#" ng-click="$ctrl.onClick()">{{node.content.info}}</a>
+  </p>
+  <div ng-hide="$ctrl.inputHidden">
+
+      <form class="thing-form">
+        <label>Syncs in realtime across clients</label>
+        <p class="input-group">
+          <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newInfo">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary" ng-click="updateNode()">Add New</button>
+            </span>
+        </p>
+      </form>
+
+  </div>
+  <p><br>###</p>
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>{{$ctrl.network.content.name}}</h2>
+
+  <p>Begin list</p>
+  <ul ng-repeat = "node in $ctrl.nodes.content">
+    <li>
+      <div>
+        <p>List item</p>
+        <a href="#" ng-click="onMouseClick(node_id)">{{node.name}}</a>
+        <p>{{node.info}}</p>
+      </div>
+    </li>
+  </ul>
+  <p>End list</p>
+</div>

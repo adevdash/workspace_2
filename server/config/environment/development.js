@@ -1,0 +1,15 @@
+'use strict';
+
+// Development specific configuration
+// ==================================
+module.exports = {
+
+  // MongoDB connection options
+  mongo: {
+    uri: 'mongodb://queen-zeal:thepoweroflavos@ds025583.mlab.com:25583/zeal'
+  },
+
+  // Seed database on startup
+  seedDB: true
+
+};
