@@ -1,5 +1,6 @@
 <div id="page-container">
-  <div id="left-container">
+  <!--<div id="left-container">-->
+  <div class="col-lg-3">
     <div class="container">
       <h3>NFD Information</h3>
 
@@ -26,7 +27,16 @@
   </div>
 
 
-  <div id="right-container">
+  <!--<div id="right-container">-->
+  <div class="col-lg-9">
     <graph></graph>
+
+    <div class="bottom-container">
+      <div class="btn-group">
+        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'">Left</label>
+        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'">Middle</label>
+        <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'">Right</label>
+      </div>
+    </div>
   </div>
 </div>

@@ -3,6 +3,7 @@
 
   <p>Begin list</p>
   <ul ng-repeat = "node in $ctrl.nodes.content | orderBy:'name'">
+  <!--| nodeFilter:$ctrl.network.content.nodes-->
     <li>
       <div>
         <p>List item</p>
@@ -12,4 +13,5 @@
     </li>
   </ul>
   <p>End list</p>
+
 </div>

@@ -26,5 +26,6 @@ angular.module('graph')
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);
       }
+
     }
 });
