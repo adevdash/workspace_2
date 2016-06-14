@@ -14,14 +14,14 @@ angular.module('NodeDataFactory', [])
     // Note: these variables are wrappers for the actual data
     // we want to use in order to keep the data in the controllers
     // up to date
-    var user_wr = [];
-    var nodeIds_wr = [];
-    var nodes_wr = [];
-      nodes_wr.content = [];
-    var networks_wr = [];
-    var network_wr = [];
-    var currNode_wr = [];
-      currNode_wr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'}; // dummy initial node
+    var userWr = [];
+    var nodeIdsWr = [];
+    var nodesWr = [];
+      nodesWr.content = [];
+    var networksWr = [];
+    var networkWr = [];
+    var currNodeWr = [];
+      currNodeWr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'}; // dummy initial node
 
 
 
@@ -32,7 +32,7 @@ angular.module('NodeDataFactory', [])
       $http.get('api/networks/')
         .then(response => {
           console.log('All networks retrieved');
-          networks_wr.content = response.data;
+          networksWr.content = response.data;
           cb();
         }, err => {
           console.log('Error retrieving all networks');
@@ -45,9 +45,9 @@ angular.module('NodeDataFactory', [])
       $http.get('api/networks/' + net_id)
         .then(response => {
           console.log('User\'s network retrieved');
-          network_wr.content = response.data;
-          //console.log(network_wr);
-          nodeIds_wr.content = network_wr.content.nodes;
+          networkWr.content = response.data;
+          //console.log(networkWr);
+          nodeIdsWr.content = networkWr.content.nodes;
           load_nodes(function(response){
 
           });
@@ -57,13 +57,13 @@ angular.module('NodeDataFactory', [])
           //handleError(err);
         });
     }
-    // Load further node content into nodes_wr
+    // Load further node content into nodesWr
     function load_nodes(cb){
       $http.get('api/nodes/')
         .then(response => {
           //console.log(response);
           console.log('All nodes retrieved');
-          nodes_wr.content = response.data;
+          nodesWr.content = response.data;
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -75,10 +75,10 @@ angular.module('NodeDataFactory', [])
     // Load rando network
     function load_rando_net(){
       load_nets(function(){
-        //console.log('Num networks: ' + networks_wr.content.length);
-        //console.log(networks_wr);
-        network_wr.content = networks_wr.content[Math.floor(Math.random() * networks_wr.content.length)];
-        nodeIds_wr.content = network_wr.content.nodes;
+        //console.log('Num networks: ' + networksWr.content.length);
+        //console.log(networksWr);
+        networkWr.content = networksWr.content[Math.floor(Math.random() * networksWr.content.length)];
+        nodeIdsWr.content = networkWr.content.nodes;
         load_nodes(function(response){});
       });
     }
@@ -97,15 +97,15 @@ angular.module('NodeDataFactory', [])
 
     // Update prototype node info
     function update_node(new_info, cb){
-      var new_node = currNode_wr.content;
+      var new_node = currNodeWr.content;
       new_node.info = new_info;
       console.log(new_node);
-        $http.put('api/nodes/' + currNode_wr.content._id, new_node)
+        $http.put('api/nodes/' + currNodeWr.content._id, new_node)
         .then(response => {
           console.log('Particular node updated');
           console.log(response.data);
           load_nodes((response)=>{});
-          load_node(currNode_wr.content._id, (response)=>{});
+          load_node(currNodeWr.content._id, (response)=>{});
           refresh_nodes();
           cb(response);
         }, err => {
@@ -116,7 +116,7 @@ angular.module('NodeDataFactory', [])
 
     function refresh_nodes(){
       // Update array with any new or deleted items pushed from the socket
-      socket.syncUpdates('node', nodes_wr.content, function(event, node, nodes){
+      socket.syncUpdates('node', nodesWr.content, function(event, node, nodes){
         // This callback is fired after the comments array is updated by the socket listeners
 
         // sort the array every time its modified
@@ -133,13 +133,13 @@ angular.module('NodeDataFactory', [])
     // Public API here
     var serviceObj = {
       extLoadNet: function(new_user){
-        user_wr.content = new_user;
+        userWr.content = new_user;
         if(!Auth.isLoggedIn()){
           load_rando_net();
           return;
         }
-        //console.log(user_wr.content.network);
-        load_net(user_wr.content.network);
+        //console.log(userWr.content.network);
+        load_net(userWr.content.network);
       },
 
       getNodeList: function(){
@@ -154,31 +154,31 @@ angular.module('NodeDataFactory', [])
       setNode: function(node){
         //angular.copy(node, currNode);
         //thisNode = node;
-        currNode_wr.content = node;
+        currNodeWr.content = node;
       },
       getNode: function(){
-        return currNode_wr;
+        return currNodeWr;
       },
 
       setNets: function(new_networks){
-        networks_wr = new_networks;
+        networksWr = new_networks;
       },
       getNets: function(){
-        return networks_wr;
+        return networksWr;
       },
 
       setCurNet: function(){
 
       },
       getCurNet: function(){
-        return network_wr;
+        return networkWr;
       },
 
       setUser: function(new_user){
-        user_wr = new_user;
+        userWr = new_user;
       },
       getUser: function(){
-        return user_wr;
+        return userWr;
       },
 
       updateNodeInfo: function(new_info, cb){
@@ -189,10 +189,10 @@ angular.module('NodeDataFactory', [])
 
       },
 
-      node: currNode_wr,
-      net: network_wr,
-      node_list: nodes_wr,
-      nodeId_list: nodeIds_wr
+      node: currNodeWr,
+      net: networkWr,
+      node_list: nodesWr,
+      nodeId_list: nodeIdsWr
     };
     return serviceObj;
   });

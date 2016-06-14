@@ -5,8 +5,9 @@ angular.module('graph')
     templateUrl: 'app/components/graph/graph.template.html',
     bindings: { message: '<' },
     controller: function($http, $scope, socket, Auth, NodeDataFactory, NodeFilterFilter){//, getNodeData) {
-      this.nodes = NodeFilterFilter(NodeDataFactory.node_list);
+
       this.network = NodeDataFactory.net;
+      this.nodes = NodeFilterFilter(NodeDataFactory.node_list, this.network.content.nodes);
 
       // Alright, let's see what we need here:
       // Need all the nodes in the network,
