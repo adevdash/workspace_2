@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('workspace2App', [
   'workspace2App.auth',
   'workspace2App.admin',
@@ -13,7 +15,8 @@ angular.module('workspace2App', [
   'graph',
   'NodeDataFactory',
   'faults',
-  'performance'//,
+  'performance',
+  'NodeFilter'//,
   //'accordionDemo'
 ]).config(
   function($urlRouterProvider, $locationProvider) {

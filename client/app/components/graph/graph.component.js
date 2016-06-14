@@ -4,8 +4,8 @@ angular.module('graph')
   .component('graph', {
     templateUrl: 'app/components/graph/graph.template.html',
     bindings: { message: '<' },
-    controller: function($http, $scope, socket, Auth, NodeDataFactory){//, getNodeData) {
-      this.nodes = NodeDataFactory.node_list;
+    controller: function($http, $scope, socket, Auth, NodeDataFactory, NodeFilterFilter){//, getNodeData) {
+      this.nodes = NodeFilterFilter(NodeDataFactory.node_list);
       this.network = NodeDataFactory.net;
 
       // Alright, let's see what we need here:
