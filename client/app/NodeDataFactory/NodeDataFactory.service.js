@@ -21,7 +21,7 @@ angular.module('NodeDataFactory', [])
     var networks_wr = [];
     var network_wr = [];
     var currNode_wr = [];
-      currNode_wr.content = {info: 'Initial data'}; // dummy initial node
+      currNode_wr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'}; // dummy initial node
 
 
 
@@ -95,6 +95,40 @@ angular.module('NodeDataFactory', [])
     }
 
 
+    // Update prototype node info
+    function update_node(new_info, cb){
+      var new_node = currNode_wr.content;
+      new_node.info = new_info;
+      console.log(new_node);
+        $http.put('api/nodes/' + currNode_wr.content._id, new_node)
+        .then(response => {
+          console.log('Particular node updated');
+          console.log(response.data);
+          load_nodes((response)=>{});
+          load_node(currNode_wr.content._id, (response)=>{});
+          refresh_nodes();
+          cb(response);
+        }, err => {
+          console.log('Error updating particular node');
+          console.log(err.data);
+        });
+    }
+
+    function refresh_nodes(){
+      // Update array with any new or deleted items pushed from the socket
+      socket.syncUpdates('node', nodes_wr.content, function(event, node, nodes){
+        // This callback is fired after the comments array is updated by the socket listeners
+
+        // sort the array every time its modified
+        nodes.sort(function(a, b) {
+          a = a.name;
+          b = b.name;
+          return a>b ? -1 : a<b ? 1 : 0;
+        });
+      });
+    }
+
+
 
     // Public API here
     var serviceObj = {
@@ -145,6 +179,10 @@ angular.module('NodeDataFactory', [])
       },
       getUser: function(){
         return user_wr;
+      },
+
+      updateNodeInfo: function(new_info, cb){
+        update_node(new_info, cb);
       },
 
       getNodeData: function(node_id){
