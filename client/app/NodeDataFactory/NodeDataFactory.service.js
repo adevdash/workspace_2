@@ -39,16 +39,18 @@ angular.module('NodeDataFactory', [])
           console.log(err.data);
           //handleError(err);
         });
-    };
+    }
     // Load one network based on user
     function load_net(net_id){
       $http.get('api/networks/' + net_id)
         .then(response => {
           console.log('User\'s network retrieved');
           network_wr.content = response.data;
-          console.log(network_wr);
+          //console.log(network_wr);
           nodeIds_wr.content = network_wr.content.nodes;
-          load_nodes();
+          load_nodes(function(response){
+
+          });
         }, err => {
           console.log('Error retrieving user\'s network');
           console.log(err.data);
@@ -59,7 +61,9 @@ angular.module('NodeDataFactory', [])
     function load_nodes(cb){
       $http.get('api/nodes/')
         .then(response => {
+          //console.log(response);
           console.log('All nodes retrieved');
+          nodes_wr.content = response.data;
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -71,11 +75,11 @@ angular.module('NodeDataFactory', [])
     // Load rando network
     function load_rando_net(){
       load_nets(function(){
-        console.log('Num networks: ' + networks_wr.content.length);
-        console.log(networks_wr);
+        //console.log('Num networks: ' + networks_wr.content.length);
+        //console.log(networks_wr);
         network_wr.content = networks_wr.content[Math.floor(Math.random() * networks_wr.content.length)];
         nodeIds_wr.content = network_wr.content.nodes;
-        load_nodes();
+        load_nodes(function(response){});
       });
     }
     // Load one node based on id
@@ -100,13 +104,13 @@ angular.module('NodeDataFactory', [])
           load_rando_net();
           return;
         }
-        console.log(user_wr.content.network);
+        //console.log(user_wr.content.network);
         load_net(user_wr.content.network);
       },
 
       getNodeList: function(){
         alert('getNodeList: '+nodes.length);
-        console.log('getNodeList: ' + nodes.length);
+        //console.log('getNodeList: ' + nodes.length);
         return nodes;
       },
       refreshNodes: function(cb){
