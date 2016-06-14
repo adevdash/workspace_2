@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('performance', [])
+angular.module('performance')
   .component('performance', {
-    template: '<h1>Hello {{ $ctrl.message }}</h1>',
+    templateUrl: 'app/components/performance/performance.template.html',
     bindings: { message: '<' },
     controller: function() {
       this.message = 'World'

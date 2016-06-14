@@ -9,8 +9,9 @@
       this.socket = socket;
       this.networks = [];
       this.ndf = NodeDataFactory;
-      var self = this;
+      this.scope = $scope;
 
+      $scope.radioModel = 'Left';
 
       Auth.getCurrentUser(function(user){
         NodeDataFactory.extLoadNet(user);
@@ -19,6 +20,10 @@
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('thing');
       });
+    }
+
+    matchesRadioButton(direction){
+      return this.scope.radioModel == direction;
     }
 
     $onInit() {

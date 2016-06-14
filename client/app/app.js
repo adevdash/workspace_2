@@ -11,7 +11,9 @@ angular.module('workspace2App', [
   'validation.match',
   'informationDisplay',
   'graph',
-  'NodeDataFactory'//,
+  'NodeDataFactory',
+  'faults',
+  'performance'//,
   //'accordionDemo'
 ]).config(
   function($urlRouterProvider, $locationProvider) {
