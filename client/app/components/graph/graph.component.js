@@ -7,7 +7,7 @@ angular.module('graph')
     controller: function($http, $scope, socket, Auth, NodeDataFactory, NodeFilterFilter){//, getNodeData) {
 
       this.network = NodeDataFactory.net;
-      this.nodes = NodeFilterFilter(NodeDataFactory.node_list, this.network.content.nodes);
+      this.nodes = NodeDataFactory.restricted_node_list;
 
       // Alright, let's see what we need here:
       // Need all the nodes in the network,

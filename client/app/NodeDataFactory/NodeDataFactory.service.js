@@ -6,8 +6,8 @@
 *
 *
  */
-angular.module('NodeDataFactory', [])
-  .factory('NodeDataFactory', function ($http, socket, Auth) {
+angular.module('NodeDataFactory', [NodeFilter])
+  .factory('NodeDataFactory', function ($http, socket, Auth, NodeFilterFilter) {
     this.$http = $http;
     this.socket = socket;
 
@@ -21,7 +21,10 @@ angular.module('NodeDataFactory', [])
     var networksWr = [];
     var networkWr = [];
     var currNodeWr = [];
-      currNodeWr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'}; // dummy initial node
+      currNodeWr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'};
+      // dummy initial node                       // field so we know it's dummy
+    var restrictedNodesWr = [];
+      restrictedNodesWr.content = [];
 
 
 
@@ -64,6 +67,7 @@ angular.module('NodeDataFactory', [])
           //console.log(response);
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
+          restrictedNodesWr.content = NodeFilterFilter(nodesWr.content, networkWr.content);
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -192,7 +196,8 @@ angular.module('NodeDataFactory', [])
       node: currNodeWr,
       net: networkWr,
       node_list: nodesWr,
-      nodeId_list: nodeIdsWr
+      nodeId_list: nodeIdsWr,
+      restricted_node_list: restrictedNodesWr
     };
     return serviceObj;
   });
