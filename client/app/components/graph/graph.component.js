@@ -24,7 +24,7 @@ angular.module('graph')
       // alexandros.resin.io/angular-d3-svg/
       //
       //
-      var color = d3.scale.category20()
+      /*var color = d3.scale.category20()
       $scope.options = {
         chart: {
           type: 'forceDirectedGraph',
@@ -64,7 +64,7 @@ angular.module('graph')
         }
       };
 
-      /* Chart data */
+      /* Chart data *//*
       $scope.data = [];
       $http.get('assets/miserables.json')
         .then(response => {
@@ -72,7 +72,7 @@ angular.module('graph')
         }, err => {
           console.log('Error reading data from JSON');
           console.log(err.data);
-        });
+        });*/
 
 
 
