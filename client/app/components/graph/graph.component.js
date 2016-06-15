@@ -29,9 +29,9 @@ angular.module('graph')
         chart: {
           type: 'forceDirectedGraph',
 
-          height: 600,
+          height: 400,
           width: (function(){ return nv.utils.windowSize().width*.6})(),
-          margin:{top: 20, right: 20, bottom: 20, left: 20},
+          margin:{top: -10, right: 20, bottom: 20, left: 20},
 
           color: function(d){
             return color(d.group)
@@ -54,9 +54,12 @@ angular.module('graph')
               .text(function(d) { return d.name })
               .style('font-size', '10px');
 
-            node.on("click", function(){
-              console.log('click');
+            node.on('click', function(cur_node){
+
             });
+            node.on('mouseover', function(cur_node){
+              console.log('moused over');
+            })
           },
         }
       };
@@ -84,7 +87,9 @@ angular.module('graph')
       // their names
 
       $scope.onMouseClick = function(node){
+        console.log('Marker one');
         NodeDataFactory.setNode(node);
+        console.log('Marker last');
       }
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);

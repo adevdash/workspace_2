@@ -155,9 +155,9 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
       },
 
       setNode: function(node){
-        //angular.copy(node, currNode);
-        //thisNode = node;
+        console.log('node about to be set');
         currNodeWr.content = node;
+        console.log('node has been set');
       },
       getNode: function(){
         return currNodeWr;
