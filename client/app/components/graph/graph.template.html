@@ -10,9 +10,23 @@
         <p>List item</p>
         <a href="#" ng-click="onMouseClick(node)">{{node.name}}</a>
         <p>{{node.info}}</p>
-      </div>
+    </div>
     </li>
   </ul>
+
+  <!-- svg + angular example -->
+  <div class="container">
+    <svg ng-attr-height="{{dimensions.height}}" ng-attr-width="{{dimensions.width}}">
+      <circle ng-repeat="node in $ctrl.nodes.content"
+      ng-attr-cx="{{30 + $index*50}}" ng-attr-cy="{{30 + $index*50}}"
+      ng-attr-r="{{15}}">
+      </circle>
+    </svg>
+  </div>
   <p>End list</p>
+
+  <div class="container">
+    <nvd3 options="options" data="data"></nvd3>
+  </div>
 
 </div>

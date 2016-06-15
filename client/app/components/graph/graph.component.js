@@ -9,6 +9,39 @@ angular.module('graph')
       this.network = NodeDataFactory.net;
       this.nodes = NodeDataFactory.restricted_node_list;
 
+      $scope.dimensions = {'width': 265, 'height': 160};
+      var color = d3.scale.category20()
+      $scope.options = {
+        chart: {
+          type: 'forceDirectedGraph',
+          height: 450,
+          width: (function(){ return nv.utils.windowSize().width - 450 })(),
+          margin:{top: 20, right: 20, bottom: 20, left: 20},
+          color: function(d){
+            return color(d.group)
+          },
+          nodeExtras: function(node) {
+            node && node
+              .append("text")
+              .attr("dx", 8)
+              .attr("dy", ".35em")
+              .text(function(d) { return d.name })
+              .style('font-size', '10px');
+          },
+          nodeClick: function(e){console.log('click');}
+        }
+      };
+
+      /* Chart data */
+      $scope.data = [];
+      $http.get('assets/miserables.json')
+        .then(response => {
+          $scope.data = response.data;
+        }, err => {
+          console.log('Error reading data from JSON');
+          console.log(err.data);
+        });
+
       // Alright, let's see what we need here:
       // Need all the nodes in the network,
       // what nodes they're connected to,

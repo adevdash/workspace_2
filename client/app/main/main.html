@@ -61,13 +61,13 @@
         <!-- change css to center and bottom this thing -->
       <div class="bottom-container">
         <div class="btn-group">
-          <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'">
+          <label uib-tooltip="Topology" class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'">
             <span class="glyphicon glyphicon-eye-open"></span>
           </label>
-          <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Middle'">
+          <label uib-tooltip="Performance" class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Middle'">
             <span class="glyphicon glyphicon-stats"></span>
           </label>
-          <label class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Right'">
+          <label class="btn btn-default" uib-tooltip="Faults" ng-model="radioModel" uib-btn-radio="'Right'">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
           </label>
         </div>
