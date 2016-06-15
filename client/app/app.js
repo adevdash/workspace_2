@@ -17,7 +17,9 @@ angular.module('workspace2App', [
   'faults',
   'performance',
   'NodeFilterModule',
-  'nvd3'//,
+  'nvd3',
+  'ngAnimate',
+  'ngAria'//,
   //'accordionDemo'
 ]).config(
   function($urlRouterProvider, $locationProvider) {
