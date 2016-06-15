@@ -6,8 +6,8 @@
 *
 *
  */
-angular.module('NodeDataFactory', [NodeFilter])
-  .factory('NodeDataFactory', function ($http, socket, Auth, NodeFilterFilter) {
+angular.module('NodeDataFactory', ['NodeFilterModule'])
+  .factory('NodeDataFactory', function ($http, socket, Auth, $filter) {
     this.$http = $http;
     this.socket = socket;
 
@@ -25,7 +25,6 @@ angular.module('NodeDataFactory', [NodeFilter])
       // dummy initial node                       // field so we know it's dummy
     var restrictedNodesWr = [];
       restrictedNodesWr.content = [];
-
 
 
     // Service logic
@@ -67,7 +66,7 @@ angular.module('NodeDataFactory', [NodeFilter])
           //console.log(response);
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
-          restrictedNodesWr.content = NodeFilterFilter(nodesWr.content, networkWr.content);
+          restrictedNodesWr.content = $filter('NodeFilter')(nodesWr.content, networkWr.content.nodes);
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');

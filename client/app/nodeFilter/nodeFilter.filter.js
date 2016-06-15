@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('NodeFilter', [])
+angular.module('NodeFilterModule', [])
   .filter('NodeFilter', function () {
     return function (nodes, allowed_nodes) {
       var result_nodes = [];
       for(var i in nodes){
-        if(allowed_nodes.indexOf(i) !== -1){
-          result_nodes.push(i);
+        if(allowed_nodes.indexOf(nodes[i]._id) !== -1){
+          result_nodes.push(nodes[i]);
         }
       }
       return result_nodes;

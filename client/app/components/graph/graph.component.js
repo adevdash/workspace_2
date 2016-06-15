@@ -15,18 +15,11 @@ angular.module('graph')
       // whether they're active or not (?),
       // their names
 
-
-      // Not quite sure why these are here
-      //this.message = Auth.getCurrentUser().name;
-      //var self = this;
-
-
       $scope.onMouseClick = function(node){
         NodeDataFactory.setNode(node);
       }
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);
       }
-
     }
 });

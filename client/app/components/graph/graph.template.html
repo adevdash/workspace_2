@@ -2,7 +2,8 @@
   <h2>{{$ctrl.network.content.name}}</h2>
 
   <p>Begin list</p>
-  <ul ng-repeat = "node in $ctrl.nodes.content | orderBy:'name'">
+  <ul ng-repeat = "node in $ctrl.nodes.content
+  | orderBy:'name'">
   <!--| nodeFilter:$ctrl.network.content.nodes-->
     <li>
       <div>

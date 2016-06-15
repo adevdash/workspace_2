@@ -16,7 +16,7 @@ angular.module('workspace2App', [
   'NodeDataFactory',
   'faults',
   'performance',
-  'NodeFilter'//,
+  'NodeFilterModule'//,
   //'accordionDemo'
 ]).config(
   function($urlRouterProvider, $locationProvider) {
