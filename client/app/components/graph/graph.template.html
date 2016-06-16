@@ -24,6 +24,29 @@
     </svg>
   </div>
   <p>End list</p>
+
+  <div class="container">
+    <svg ng-attr-width="{{width}}"
+         ng-attr-height="{{height}}">
+      <line   ng-repeat="link in links"
+              class="link"
+              ng-attr-stroke-width="{{link.strokeWidth}}"
+              ng-attr-x1="{{link.source.x}}"
+              ng-attr-y1="{{link.source.y}}"
+              ng-attr-x2="{{link.target.x}}"
+              ng-attr-y2="{{link.target.y}}"
+              style="stroke:rgb(200,200,200);">
+      </line>
+      <circle ng-repeat="node in nodes"
+              class="node"
+              r="5"
+              ng-attr-fill="{{node.color}}"
+              ng-attr-cx="{{node.x}}"
+              ng-attr-cy="{{node.y}}">
+        <title>{{node.name}}</title>
+      </circle>
+    </svg>
+  </div>
 <!--
   <div class="container">
     <nvd3 options="options" data="data"></nvd3>
