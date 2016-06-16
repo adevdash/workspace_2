@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('graph',['NodeDataFactory', 'NodeFilterModule', 'nvd3']);
+angular.module('graph',['NodeDataFactory', 'NodeFilterModule']);
