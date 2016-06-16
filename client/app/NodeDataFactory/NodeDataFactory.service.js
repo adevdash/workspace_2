@@ -69,6 +69,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
           restrictedNodesWr.content = $filter('NodeFilter')(nodesWr.content, networkWr.content.nodes);
+          formattedNodesWr.content = format_nodes(restrictedNodesWr.content);
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -133,10 +134,9 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
       });
     }
 
-
-
+    // Puts nodes into JSON format
     function format_nodes(nodes){
-
+      return $filter('NodeFormatFilter')(nodes);
     }
 
 

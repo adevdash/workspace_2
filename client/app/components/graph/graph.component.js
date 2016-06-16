@@ -8,7 +8,7 @@ angular.module('graph')
 
       this.network = NodeDataFactory.net;
       this.nodes = NodeDataFactory.restricted_node_list;
-      this.nodesGraphFormat = NodeDataFactory.formatted_nodes;
+      this.formattedNodes = NodeDataFactory.formatted_nodes;
 
       // In the future it may be better to rework it from
       // the ground up with purely AngularJS and SVG,
@@ -55,8 +55,6 @@ angular.module('graph')
       });
 
 
-
-
       // Alright, let's see what we need here:
       // Need all the nodes in the network, (check)
       // what nodes they're connected to, (also check)
@@ -68,9 +66,6 @@ angular.module('graph')
       }
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);
-      }
-      $scope.onNodeClick = function(node, event){
-        console.log(event.x + ', ' + event.y);
       }
     }
 });
