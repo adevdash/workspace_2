@@ -39,10 +39,12 @@
       </line>
       <circle ng-repeat="node in nodes"
               class="node"
-              r="5"
+              r="7"
               ng-attr-fill="{{node.color}}"
               ng-attr-cx="{{node.x}}"
-              ng-attr-cy="{{node.y}}">
+              ng-attr-cy="{{node.y}}"
+              ng-click="onNodeClick(node, $event)"
+              stroke="white" stroke-width="2">
         <title>{{node.name}}</title>
       </circle>
     </svg>

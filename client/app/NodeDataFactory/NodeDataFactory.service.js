@@ -25,6 +25,8 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
       // dummy initial node                       // field so we know it's dummy
     var restrictedNodesWr = [];
       restrictedNodesWr.content = [];
+    var formattedNodesWr = [];
+      formattedNodesWr.content = [];
 
 
     // Service logic
@@ -133,6 +135,11 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
 
 
 
+    function format_nodes(nodes){
+
+    }
+
+
     // Public API here
     var serviceObj = {
       extLoadNet: function(new_user){
@@ -196,7 +203,8 @@ angular.module('NodeDataFactory', ['NodeFilterModule'])
       net: networkWr,
       node_list: nodesWr,
       nodeId_list: nodeIdsWr,
-      restricted_node_list: restrictedNodesWr
+      restricted_node_list: restrictedNodesWr,
+      formatted_nodes: formattedNodesWr
     };
     return serviceObj;
   });

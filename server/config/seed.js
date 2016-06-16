@@ -52,12 +52,17 @@ Node.find({}).remove()
     node3 = new Node({name: 'Node 3', info: 'Test node 3', active: false});
     node4 = new Node({name: 'Node 4', info: 'Test node 4', active: true});
     node5 = new Node({name: 'Node 5', info: 'Test node 5', active: false});
+    node1.faces.push(node2);
+    node2.faces.push(node1, node3);
+    node3.faces.push(node2);
+    node4.faces.push(node5);
+    node5.faces.push(node4);
     node1.save();
     node2.save();
     node3.save();
     node4.save();
     node5.save();
-    console.log(node1);
+    //console.log(node1);
     //Node.create(node1, node2, node3);
   });
 
@@ -71,7 +76,7 @@ Network.find({}).remove()
     //console.log(net1);
     Node.findOne({_id: net1.nodes[0]}, function(err, node){
       if(err) return handleError(err);
-      console.log(node);
+      //console.log(node);
     });
     //console.log(Node.findOne({_id: net1.nodes[0]}));
     net1.save();
@@ -106,11 +111,11 @@ User.find({}).remove()
       User.find({}, function(err, users){
         if(err) return handleError(err);
         for(var i in users){
-          console.log(users[i]);
-          console.log(net1._id);
+          //console.log(users[i]);
+          //console.log(net1._id);
           users[i].network = net1._id;
           users[i].save();
-          console.log(users[i]);
+          //console.log(users[i]);
         }
       });
 

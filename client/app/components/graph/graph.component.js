@@ -8,7 +8,7 @@ angular.module('graph')
 
       this.network = NodeDataFactory.net;
       this.nodes = NodeDataFactory.restricted_node_list;
-
+      this.nodesGraphFormat = NodeDataFactory.formatted_nodes;
 
       // In the future it may be better to rework it from
       // the ground up with purely AngularJS and SVG,
@@ -17,13 +17,18 @@ angular.module('graph')
       //
 
       // Try to do the force-directed graph using AngularJSVG
-      $scope.width = 500;
-      $scope.height = 500;
+      $scope.width = 600;
+      $scope.height = 600;
       var color = d3.scale.category20()
       var force = d3.layout.force()
+        .size([$scope.width, $scope.height])
+        .linkStrength(0.1)
+        .friction(0.9)
+        .linkDistance(45)
         .charge(-120)
-        .linkDistance(30)
-        .size([$scope.width, $scope.height]);
+        .gravity(0.1)
+        .theta(0.8)
+        .alpha(0.1);
 
       $http.get('assets/miserables.json').then(
       function(graph) {
@@ -53,18 +58,19 @@ angular.module('graph')
 
 
       // Alright, let's see what we need here:
-      // Need all the nodes in the network,
-      // what nodes they're connected to,
+      // Need all the nodes in the network, (check)
+      // what nodes they're connected to, (also check)
       // whether they're active or not (?),
-      // their names
+      // their names (checkamundo, if you're not into the whole brevity thing)
 
       $scope.onMouseClick = function(node){
-        console.log('Marker one');
         NodeDataFactory.setNode(node);
-        console.log('Marker last');
       }
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);
+      }
+      $scope.onNodeClick = function(node, event){
+        console.log(event.x + ', ' + event.y);
       }
     }
 });
