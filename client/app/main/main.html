@@ -3,10 +3,55 @@
   <!--<div class="col-lg-3">-->
     <div class="container">
       <h3>NFD Information</h3>
+      <div class="top-left-container">
+
+        <div class="btn-group" style="width:40%" ng-show="$ctrl.isAdmin()">
+          <label uib-tooltip="NFD"
+                 class="btn btn-default"
+                 ng-model="infoRadioModel"
+                 uib-btn-radio="'Left'"
+                 style="width:13.3333%">
+            <span class="glyphicon glyphicon-share-alt"></span>
+          </label>
+          <label uib-tooltip="NLSR"
+                 class="btn btn-default"
+                 ng-model="infoRadioModel"
+                 uib-btn-radio="'Middle'"
+                 style="width:13.3334%">
+            <span class="glyphicon glyphicon-folder-open"></span>
+          </label>
+          <label uib-tooltip="Managers"
+                 class="btn btn-default"
+                 ng-model="infoRadioModel"
+                 uib-btn-radio="'Right'"
+                 style="width:13.3333%">
+            <span class="glyphicon glyphicon-user"></span>
+          </label>
+        </div>
+
+        <!-- Let's hear it for sh!tty markup repetition -->
+        <div class="btn-group" style="width:40%" ng-hide="$ctrl.isAdmin()">
+          <label uib-tooltip="NFD"
+                 class="btn btn-default"
+                 ng-model="infoRadioModel"
+                 uib-btn-radio="'Left'"
+                 style="width:20%">
+            <span class="glyphicon glyphicon-share-alt"></span>
+          </label>
+          <label uib-tooltip="NLSR"
+                 class="btn btn-default"
+                 ng-model="infoRadioModel"
+                 uib-btn-radio="'Right'"
+                 style="width:20%">
+            <span class="glyphicon glyphicon-folder-open"></span>
+          </label>
+        </div>
+
+      </div>
 
 
       <!-- Yayyy got the dropdown to work -->
-      <div class="dropdown" uib-dropdown style="width:40%; min-width:300px">
+      <div class="dropdown" uib-dropdown style="width:40%; min-width:300px; margin-top:5px;">
         <button class="btn btn-primary dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="dropdown">Dropdown Example
           <span class="caret"></span></button>
         <ul class="dropdown-menu" uib-dropdown-menu>
@@ -17,11 +62,9 @@
       </div>
 
 
-
-
-      <div>
-        <information-display></information-display>
-      </div>
+      <information-display ng-show="$ctrl.matchesInfoRadioButton('Left')"></information-display>
+      <nlsr-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Middle' : 'Right')"></nlsr-display>
+      <manager-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Right' : '')"></manager-display>
 
     </div>
   </div>

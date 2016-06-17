@@ -198,9 +198,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
       },
 
       setNode: function(node){
-        console.log('node about to be set');
         currNodeWr.content = node;
-        console.log('node has been set');
       },
       getNode: function(){
         return currNodeWr;

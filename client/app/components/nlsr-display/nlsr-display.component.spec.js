@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Component: informationDisplay', function () {
+describe('Component: nlsrDisplay', function () {
 
   // load the component's module
-  beforeEach(module('informationDisplay'));
+  beforeEach(module('nlsr-display'));
 
-  var informationDisplayComponent, scope;
+  var nlsrDisplayComponent, scope;
 
   // Initialize the component and a mock scope
   beforeEach(inject(function ($componentController, $rootScope) {
     scope = $rootScope.$new();
-    informationDisplayComponent = $componentController('informationDisplay', {
+    nlsrDisplayComponent = $componentController('nlsrDisplay', {
       $scope: scope
     });
   }));

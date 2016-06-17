@@ -1,16 +1,16 @@
 'use strict';
 
-describe('Component: informationDisplay', function () {
+describe('Component: managerDisplay', function () {
 
   // load the component's module
-  beforeEach(module('informationDisplay'));
+  beforeEach(module('manager-display'));
 
-  var informationDisplayComponent, scope;
+  var managerDisplayComponent, scope;
 
   // Initialize the component and a mock scope
   beforeEach(inject(function ($componentController, $rootScope) {
     scope = $rootScope.$new();
-    informationDisplayComponent = $componentController('informationDisplay', {
+    managerDisplayComponent = $componentController('managerDisplay', {
       $scope: scope
     });
   }));

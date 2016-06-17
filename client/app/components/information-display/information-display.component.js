@@ -7,6 +7,7 @@ angular.module('informationDisplay')
     controller: function ($http, $scope, socket, Auth, NodeDataFactory) {
       $scope.node = NodeDataFactory.node;
       $scope.nodes = NodeDataFactory.node_list;
+      $scope.network = NodeDataFactory.net;
       this.inputHidden = true;
       this.newInfo = '';
       var self = this;
@@ -18,12 +19,16 @@ angular.module('informationDisplay')
 
 
       this.updateNode = function(){
-        if(this.newInfo && !$scope.node.content.hasOwnProperty('karmaPolice')) {
+        if(this.newInfo && !this.isDummyNode()) {
           console.log(this.newInfo);
           NodeDataFactory.updateNodeInfo(this.newInfo, (response)=> {
           });
           this.newInfo = '';
         }
+      }
+
+      this.isDummyNode = function(){
+        return $scope.node.content.hasOwnProperty('karmaPolice')
       }
     }
   }

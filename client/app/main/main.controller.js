@@ -10,42 +10,34 @@
       this.networks = [];
       this.ndf = NodeDataFactory;
       this.scope = $scope;
+      this.isAdmin = Auth.isAdmin;
 
       $scope.radioModel = 'Left';
+      $scope.infoRadioModel = 'Left';
 
+      // Sets off the cascade of loading everything.
+      // Do not mess with this.
+      // Asynchronous calls are bad enough as it is.
       Auth.getCurrentUser(function(user){
         NodeDataFactory.extLoadNet(user);
       })
 
+      // I don't really know what this does
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('thing');
       });
     }
 
+    // Deciding which components are displayed based on the radio button arrays
     matchesRadioButton(direction){
       return this.scope.radioModel == direction;
     }
+    matchesInfoRadioButton(direction){
+      return this.scope.infoRadioModel == direction;
+    }
 
     $onInit() {
-      /*this.auth.getCurrentUser(function(user){
-        ndf.extLoadNet(user);
-      });*/
-      /*this.$http.get('/api/things')
-        .then(response => {
-          this.awesomeThings = response.data;
-          this.socket.syncUpdates('thing', this.awesomeThings);
-        }, response => {
 
-        });
-
-      /*this.$http.get('/api/networks')
-        .then(
-          // Success callback
-          function(response){
-            this.networks = response.data;
-            this.socket.syncUpdates('network', this.networks);
-          }
-        )*/
     }
   }
 
