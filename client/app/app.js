@@ -20,7 +20,8 @@ angular.module('workspace2App', [
   'ngAnimate',
   'ngAria',
   'nlsr-display',
-  'manager-display'
+  'manager-display',
+  'nodeTitle'
 ]).config(
   function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

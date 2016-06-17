@@ -153,8 +153,8 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
         .size([widthWr.content, heightWr.content])
         .linkStrength(0.1)    // 0.1
         .friction(0.9)        // 0.9
-        .linkDistance(40)     // 30
-        .charge(-400)         // -160
+        .linkDistance(100)     // 30
+        .charge(-600)         // -160
         .gravity(0.1)         // 0.1
         .theta(0.8)           // 0.8
         .alpha(0.1);          // 0.1
