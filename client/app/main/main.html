@@ -1,7 +1,8 @@
 <div id="page-container">
-  <div id="left-container">
+
+  <div class="container" id="left-container">
   <!--<div class="col-lg-3">-->
-    <div class="container">
+      <!--
       <h3>NFD Information</h3>
       <div class="top-left-container">
 
@@ -29,7 +30,7 @@
           </label>
         </div>
 
-        <!-- Let's hear it for sh!tty markup repetition -->
+        <!-- Let's hear it for sh!tty markup repetition
         <div class="btn-group" style="width:40%" ng-hide="$ctrl.isAdmin()">
           <label uib-tooltip="NFD"
                  class="btn btn-default"
@@ -48,9 +49,9 @@
         </div>
 
       </div>
+      -->
 
-
-      <!-- Yayyy got the dropdown to work -->
+      <!-- Yayyy got the dropdown to work
       <div class="dropdown" uib-dropdown style="width:40%; min-width:300px; margin-top:5px;">
         <button class="btn btn-primary dropdown-toggle" uib-dropdown-toggle type="button" data-toggle="dropdown">Dropdown Example
           <span class="caret"></span></button>
@@ -60,13 +61,19 @@
           <li><a href="#">JavaScript</a></li>
         </ul>
       </div>
+      -->
 
+      <!-- Tabs instead of buttons to navigate -->
+      <ul class="nav nav-tabs nav-justified" style="margin-top:5px">
+        <li role="presentation" class="active"><a href="#">NFD</a></li>
+        <li role="presentation"><a href="#">NLSR</a></li>
+        <li role="presentation" ng-show="$ctrl.isAdmin()"><a href="#">Managers</a></li>
+      </ul>
 
       <information-display ng-show="$ctrl.matchesInfoRadioButton('Left')"></information-display>
       <nlsr-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Middle' : 'Right')"></nlsr-display>
       <manager-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Right' : '')"></manager-display>
 
-    </div>
   </div>
 
 

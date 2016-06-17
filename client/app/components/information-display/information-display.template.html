@@ -4,23 +4,23 @@
 
 <div style="margin-top: 5px" ng-hide="$ctrl.isDummyNode()">
   <uib-accordion>
-    <uib-accordion-group heading="Faces" style="width:40%">
+    <uib-accordion-group heading="Faces">
       <ul ng-repeat="face in node.content.faces">
         <li>
           {{(face | IdToNode:nodes.content).name}}
         </li>
       </ul>
     </uib-accordion-group>
-    <uib-accordion-group heading="RIB" style="width:40%">
+    <uib-accordion-group heading="RIB">
       <p>Mmm... ribs...</p>
     </uib-accordion-group>
-    <uib-accordion-group heading="FIB" style="width:40%">
+    <uib-accordion-group heading="FIB">
       <p>It's a lie! ... isn't it???!?!?!</p>
     </uib-accordion-group>
-    <uib-accordion-group heading="Nexthops" style="width:40%">
+    <uib-accordion-group heading="Nexthops">
       <p>Do the hop, the something something hop!</p>
     </uib-accordion-group>
-    <uib-accordion-group heading="Forwarding Strategy" style="width:40%">
+    <uib-accordion-group heading="Forwarding Strategy">
       <p>My strategy is to win everything</p>
     </uib-accordion-group>
   </uib-accordion>
