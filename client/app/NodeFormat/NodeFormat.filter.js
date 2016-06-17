@@ -13,15 +13,12 @@ angular.module('NodeFormat', [])
       var link = {};
       var k;
       for(var i = 0; i < nodes.length; i++){
-        for(var j in nodes[i].faces){
-          // i is an integer
-          // j is a node id
-
+        for(var j = 0; j < nodes[i].faces.length; j++){
           // Searches nodes array until it finds the element whose
           // id matches j, and returns that elements index
           k = nodes.findIndex(function comparator(element, index, array){
             return (this == element._id);
-          }, j);
+          }, nodes[i].faces[j]);
 
           // Prevents duplicate links
           if(k > i){
@@ -30,7 +27,7 @@ angular.module('NodeFormat', [])
               "target": i,
               "value": 10
             }
-            result.push(link);
+            result.links.push(link);
           }
         }
       }

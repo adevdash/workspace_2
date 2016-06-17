@@ -1,10 +1,9 @@
 <div class="container">
   <h2>{{$ctrl.network.content.name}}</h2>
 
-  <p>Begin list</p>
+  <!--<p>Begin list</p>
   <ul ng-repeat = "node in $ctrl.nodes.content
   | orderBy:'name'">
-  <!--| nodeFilter:$ctrl.network.content.nodes-->
     <li>
       <div>
         <p>List item</p>
@@ -14,7 +13,7 @@
     </li>
   </ul>
 
-  <!-- svg + angular example -->
+  <!-- svg + angular example --
   <div class="container">
     <svg ng-attr-height="400" ng-attr-width="600">
       <circle ng-repeat="node in $ctrl.nodes.content"
@@ -23,12 +22,12 @@
       </circle>
     </svg>
   </div>
-  <p>End list</p>
+  <p>End list</p>-->
 
   <div class="container">
     <svg ng-attr-width="{{width}}"
          ng-attr-height="{{height}}">
-      <line   ng-repeat="link in links"
+      <line   ng-repeat="link in links.content"
               class="link"
               ng-attr-stroke-width="{{link.strokeWidth}}"
               ng-attr-x1="{{link.source.x}}"
@@ -37,15 +36,23 @@
               ng-attr-y2="{{link.target.y}}"
               style="stroke:rgb(200,200,200);">
       </line>
-      <circle ng-repeat="node in nodes"
+      <circle ng-repeat="node in nodes.content"
               class="node"
-              r="7"
+              r="12"
               ng-attr-fill="{{node.color}}"
               ng-attr-cx="{{node.x}}"
               ng-attr-cy="{{node.y}}"
-              stroke="white" stroke-width="2">
+              stroke="white" stroke-width="3"
+              ng-click="onMouseClick(node)">
         <title>{{node.name}}</title>
       </circle>
+      <text ng-repeat="node in nodes.content"
+            ng-attr-x="{{node.x + 10}}"
+            ng-attr-y="{{node.y - 10}}"
+
+            font-size="16">
+        {{node.name}}
+      </text>
     </svg>
   </div>
 <!--
