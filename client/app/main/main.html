@@ -66,14 +66,24 @@
 
       <!-- Tabs instead of buttons to navigate -->
       <ul class="nav nav-tabs nav-justified" style="margin-top:5px">
-        <li role="presentation" class="active"><a href="#">NFD</a></li>
-        <li role="presentation"><a href="#">NLSR</a></li>
-        <li role="presentation" ng-show="$ctrl.isAdmin()"><a href="#">Managers</a></li>
+        <li role="presentation"
+            class={{$ctrl.matchesInfoRadioButton('Left')?'active':'inactive'}}>
+          <a href="#" ng-click="$ctrl.setInfoRadioButton('Left')">NFD</a>
+        </li>
+        <li role="presentation"
+            class={{$ctrl.matchesInfoRadioButton('Middle')?'active':'inactive'}}>
+          <a href="#" ng-click="$ctrl.setInfoRadioButton('Middle')">NLSR</a>
+        </li>
+        <li role="presentation"
+            ng-show="$ctrl.isAdmin()"
+            class={{$ctrl.matchesInfoRadioButton('Right')?'active':'inactive'}}>
+          <a href="#" ng-click="$ctrl.setInfoRadioButton('Right')">Managers</a>
+        </li>
       </ul>
 
       <information-display ng-show="$ctrl.matchesInfoRadioButton('Left')"></information-display>
-      <nlsr-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Middle' : 'Right')"></nlsr-display>
-      <manager-display ng-show="$ctrl.matchesInfoRadioButton($ctrl.isAdmin() ? 'Right' : '')"></manager-display>
+      <nlsr-display ng-show="$ctrl.matchesInfoRadioButton('Middle')"></nlsr-display>
+      <manager-display ng-show="$ctrl.matchesInfoRadioButton('Right')"></manager-display>
 
   </div>
 

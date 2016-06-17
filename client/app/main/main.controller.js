@@ -32,6 +32,9 @@
     matchesRadioButton(direction){
       return this.scope.radioModel == direction;
     }
+    setInfoRadioButton(direction){
+      this.scope.infoRadioModel = direction;
+    }
     matchesInfoRadioButton(direction){
       return this.scope.infoRadioModel == direction;
     }
