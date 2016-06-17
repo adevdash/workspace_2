@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('informationDisplay',['NodeDataFactory']);
+angular.module('informationDisplay',['NodeDataFactory', 'IdToNode']);

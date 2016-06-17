@@ -6,6 +6,7 @@ angular.module('informationDisplay')
     bindings: { message: '<' },
     controller: function ($http, $scope, socket, Auth, NodeDataFactory) {
       $scope.node = NodeDataFactory.node;
+      $scope.nodes = NodeDataFactory.node_list;
       this.inputHidden = true;
       this.newInfo = '';
       var self = this;
