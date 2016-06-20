@@ -8,6 +8,7 @@ angular.module('informationDisplay')
       $scope.node = NodeDataFactory.node;
       $scope.nodes = NodeDataFactory.node_list;
       $scope.network = NodeDataFactory.net;
+      
       this.inputHidden = true;
       this.newInfo = '';
       var self = this;

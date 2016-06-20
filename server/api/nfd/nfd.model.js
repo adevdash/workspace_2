@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 
 var NfdSchema = new mongoose.Schema({
   name: String,
+
+  channels: [String],
+
   info: String,
   active: Boolean
 });

@@ -7,50 +7,6 @@
       <h3>NFD Information</h3>
       <div class="top-left-container">
 
-        <div class="btn-group" style="width:40%" ng-show="$ctrl.isAdmin()">
-          <label uib-tooltip="NFD"
-                 class="btn btn-default"
-                 ng-model="infoRadioModel"
-                 uib-btn-radio="'Left'"
-                 style="width:13.3333%">
-            <span class="glyphicon glyphicon-share-alt"></span>
-          </label>
-          <label uib-tooltip="NLSR"
-                 class="btn btn-default"
-                 ng-model="infoRadioModel"
-                 uib-btn-radio="'Middle'"
-                 style="width:13.3334%">
-            <span class="glyphicon glyphicon-folder-open"></span>
-          </label>
-          <label uib-tooltip="Managers"
-                 class="btn btn-default"
-                 ng-model="infoRadioModel"
-                 uib-btn-radio="'Right'"
-                 style="width:13.3333%">
-            <span class="glyphicon glyphicon-user"></span>
-          </label>
-        </div>
-
-        <!-- Let's hear it for sh!tty markup repetition
-        <div class="btn-group" style="width:40%" ng-hide="$ctrl.isAdmin()">
-          <label uib-tooltip="NFD"
-                 class="btn btn-default"
-                 ng-model="infoRadioModel"
-                 uib-btn-radio="'Left'"
-                 style="width:20%">
-            <span class="glyphicon glyphicon-share-alt"></span>
-          </label>
-          <label uib-tooltip="NLSR"
-                 class="btn btn-default"
-                 ng-model="infoRadioModel"
-                 uib-btn-radio="'Right'"
-                 style="width:20%">
-            <span class="glyphicon glyphicon-folder-open"></span>
-          </label>
-        </div>
-
-      </div>
-      -->
 
       <!-- Yayyy got the dropdown to work
       <div class="dropdown" uib-dropdown style="width:40%; min-width:300px; margin-top:5px;">
@@ -65,38 +21,31 @@
       -->
 
       <!-- Tabs instead of buttons to navigate -->
-      <ul class="nav nav-tabs nav-justified" style="margin-top:5px">
-        <li role="presentation"
-            class={{$ctrl.matchesInfoRadioButton('Left')?'active':'inactive'}}>
-          <a href="#" ng-click="$ctrl.setInfoRadioButton('Left')">NFD</a>
-        </li>
-        <li role="presentation"
-            class={{$ctrl.matchesInfoRadioButton('Middle')?'active':'inactive'}}>
-          <a href="#" ng-click="$ctrl.setInfoRadioButton('Middle')">NLSR</a>
-        </li>
-        <li role="presentation"
-            ng-show="$ctrl.isAdmin()"
-            class={{$ctrl.matchesInfoRadioButton('Right')?'active':'inactive'}}>
-          <a href="#" ng-click="$ctrl.setInfoRadioButton('Right')">Managers</a>
-        </li>
-      </ul>
-
-      <information-display ng-show="$ctrl.matchesInfoRadioButton('Left')"></information-display>
-      <nlsr-display ng-show="$ctrl.matchesInfoRadioButton('Middle')"></nlsr-display>
-      <manager-display ng-show="$ctrl.matchesInfoRadioButton('Right')"></manager-display>
+      <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading="NFD">
+          <information-display></information-display>
+        </uib-tab>
+        <uib-tab index="1" heading="NLSR">
+          <nlsr-display></nlsr-display>
+        </uib-tab>
+        <uib-tab index="2" heading="Managers" ng-show="$ctrl.isAdmin()">
+          <manager-display></manager-display>
+        </uib-tab>
+      </uib-tabset>
 
   </div>
 
 
   <div id="right-container">
     <!--<div class="col-lg-9">-->
-      <div class="container">
+    <!--
+      <div class="container" style="width:100%">
 
         <graph ng-show="$ctrl.matchesRadioButton('Left')"></graph>
         <performance ng-show="$ctrl.matchesRadioButton('Middle')"></performance>
-        <faults ng-show="$ctrl.matchesRadioButton('Right')"></faults>
+        <faults ng-show="$ctrl.matchesRadioButton('Right')"></faults>-->
 
-        <!-- change css to center and bottom this thing -->
+        <!-- change css to center and bottom this thing --><!--
       <div class="bottom-container">
         <div class="btn-group">
           <label uib-tooltip="Topology" class="btn btn-default" ng-model="radioModel" uib-btn-radio="'Left'">
@@ -111,6 +60,29 @@
         </div>
       </div>
 
-    </div>
+    </div>-->
+    <uib-tabset type="pills">
+      <uib-tab uib-tooltip="Topology">
+        <uib-tab-heading>
+          <i class="glyphicon glyphicon-eye-open"></i>
+        </uib-tab-heading>
+        <graph></graph>
+      </uib-tab>
+
+      <uib-tab uib-tooltip="Performance">
+        <uib-tab-heading>
+          <i class="glyphicon glyphicon-stats"></i>
+        </uib-tab-heading>
+        <performance></performance>
+      </uib-tab>
+
+      <uib-tab uib-tooltip="Faults">
+        <uib-tab-heading>
+          <i class="glyphicon glyphicon-exclamation-sign"></i>
+        </uib-tab-heading>
+        <faults></faults>
+      </uib-tab>
+    </uib-tabset>
+
   </div>
 </div>
