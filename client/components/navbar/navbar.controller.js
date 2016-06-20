@@ -9,6 +9,9 @@ class NavbarController {
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
 
+    this.menu = [];
+      this.menu[0] = {"title": "About", "state": "about"};
+
     this.searchText = '';
   }
 

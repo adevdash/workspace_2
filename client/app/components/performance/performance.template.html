@@ -1,1 +1,9 @@
 <h1>Hello {{ $ctrl.message }}</h1>
+
+<svg ng-attr-height="{{graph.height}}" ng-attr-width="{{graph.width}}">
+  <path class="line"
+        ng-attr-d="{{line(points)}}"
+        fill="none"
+        stroke="#4488AA"
+        stroke-width="2"></path>
+</svg>

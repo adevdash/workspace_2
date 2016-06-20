@@ -49,9 +49,9 @@
       <text ng-repeat="node in nodes.content"
             ng-attr-x="{{node.x + 8}}"
             ng-attr-y="{{node.y - 8}}"
-
+            ng-click="onMouseClick(node)"
             font-size="10">
-        {{node.name}}
+        <a href="#">{{node.name}}</a>
       </text>
     </svg>
   </div>
