@@ -8,25 +8,6 @@ angular.module('informationDisplay')
       $scope.node = NodeDataFactory.node;
       $scope.nodes = NodeDataFactory.node_list;
       $scope.network = NodeDataFactory.net;
-      
-      this.inputHidden = true;
-      this.newInfo = '';
-      var self = this;
-
-      // toggle the visibility of the input text box
-      this.onClick = function(){
-        this.inputHidden = !this.inputHidden;
-      }
-
-
-      this.updateNode = function(){
-        if(this.newInfo && !this.isDummyNode()) {
-          console.log(this.newInfo);
-          NodeDataFactory.updateNodeInfo(this.newInfo, (response)=> {
-          });
-          this.newInfo = '';
-        }
-      }
 
       this.isDummyNode = function(){
         return $scope.node.content.hasOwnProperty('karmaPolice')

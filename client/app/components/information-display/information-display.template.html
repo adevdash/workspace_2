@@ -14,7 +14,7 @@
         </li>
       </ul>
 
-
+      <hr />
       <div ng-controller="FaceControllerCtrl">
         <button type="button" class="btn btn-default" ng-click="newFaceForm = !newFaceForm">
           New face
@@ -39,11 +39,54 @@
     </uib-accordion-group>
     <uib-accordion-group heading="FIB">
 
+
+      <hr />
+      <div ng-controller="FibControllerCtrl">
+        <button type="button" class="btn btn-default" ng-click="newNextHopForm = !newNextHopForm">
+          New nexthop
+        </button>
+        <div uib-collapse="newNextHopForm">
+          <div class="well well-lg" style="margin-top: 5px">
+            <input type="text" ng-model="newNextHopPath" class="form-control" placeholder="Path">
+            <input type="text" ng-model="newNextHopFaceId" class="form-control" placeholder="Face ID"
+                   style="margin-top: 5px">
+            <input type="text" ng-model="newNextHopCost" class="form-control" placeholder="Cost"
+                   style="margin-top: 5px">
+            <button type="button" class="btn btn-primary" ng-click="createNextHop()" style="margin-top: 5px">
+              Create nexthop
+            </button>
+          </div>
+        </div>
+      </div>
     </uib-accordion-group>
     <uib-accordion-group heading="RIB">
 
+
+      <hr />
+      <div ng-controller="FaceControllerCtrl">
+        <button type="button" class="btn btn-default" ng-click="newFaceForm = !newFaceForm">
+          New face
+        </button>
+        <div uib-collapse="newFaceForm">
+          <div class="well well-lg" style="margin-top: 5px">
+            <input type="text" ng-model="newFaceUri" class="form-control" placeholder="Face URI">
+            <input type="text" ng-model="newFaceId" class="form-control" placeholder="Face ID"
+                   style="margin-top: 5px">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="newFacePermanent"> Permanent
+              </label>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="createFace()">
+              Create face
+            </button>
+          </div>
+        </div>
+      </div>
     </uib-accordion-group>
     <uib-accordion-group heading="Forwarding Strategy">
+
+
 
     </uib-accordion-group>
   </uib-accordion>
