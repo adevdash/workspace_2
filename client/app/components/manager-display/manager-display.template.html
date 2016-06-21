@@ -16,19 +16,21 @@
 </div>-->
 
 
-<!-- have to add something that clears the node selection -->
-<!-- also just noticed that the node returned is wrong -->
 <!-- Accordion list of managers -->
 <uib-accordion ng-repeat="manager in managers">
   <uib-accordion-group style="margin-top: 5px; overflow: visible">
-    <uib-accordion-heading>{{manager.name}}</uib-accordion-heading>
 
-    <!-- List of nodes the manager controls -->
+    <!-- in order to clear node selection upon switching managers -->
+    <uib-accordion-heading>
+      <a href="#" ng-click="clearNodeChoice()">{{manager.name}}</a>
+    </uib-accordion-heading>
+
+    <!-- List of nodes the manager controls with a delete button for each-->
     <ul ng-repeat="nodeId in manager.nodes" class="nav nav-tabs nav-stacked">
       <li>
         <a href="#">
           {{(nodeId | IdToNode).name}}
-          <button type="button" class="close" ng-click="deleteManager(manager)">&times;</button>
+          <button type="button" class="close" ng-click="deleteNode(manager)">&times;</button>
         </a>
       </li>
     </ul>
