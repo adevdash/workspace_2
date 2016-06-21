@@ -41,7 +41,7 @@ Thing.find({}).remove()
     });
   });
 
-var node1, node2, node3, node4, node5;
+var node1, node2, node3;
 //node1 = new Node({name: 'Node 1', info: 'Test node 1', active: true});
 //node2 = new Node({name: 'Node 2', info: 'Test node 2', active: true});
 //node3 = new Node({name: 'Node 3', info: 'Test node 3', active: true});
@@ -50,29 +50,21 @@ Node.find({}).remove()
     node1 = new Node({name: 'Node 1', info: 'Test node 1', active: true});
     node2 = new Node({name: 'Node 2', info: 'Test node 2', active: true});
     node3 = new Node({name: 'Node 3', info: 'Test node 3', active: false});
-    node4 = new Node({name: 'Node 4', info: 'Test node 4', active: true});
-    node5 = new Node({name: 'Node 5', info: 'Test node 5', active: false});
     node1.faces.push(node2);
     node2.faces.push(node1, node3);
     node3.faces.push(node2);
-    node4.faces.push(node5);
-    node5.faces.push(node4);
     node1.save();
     node2.save();
     node3.save();
-    node4.save();
-    node5.save();
     //console.log(node1);
     //Node.create(node1, node2, node3);
   });
 
-var net1, net2;// = new Network({name: 'Network 1', info: 'Test network 1'});
+var net1;// = new Network({name: 'Network 1', info: 'Test network 1'});
 Network.find({}).remove()
   .then(() => {
     net1 = new Network({name: 'Network 1', info: 'Test network 1'});
-    net2 = new Network({name: 'Network 2', info: 'Test network 2'});
     net1.nodes.push(node1, node2, node3);
-    net2.nodes.push(node4, node5);
     //console.log(net1);
     Node.findOne({_id: net1.nodes[0]}, function(err, node){
       if(err) return handleError(err);
@@ -80,7 +72,6 @@ Network.find({}).remove()
     });
     //console.log(Node.findOne({_id: net1.nodes[0]}));
     net1.save();
-    net2.save();
   });
 
 User.find({}).remove()

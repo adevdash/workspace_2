@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('manager-display', []);
+angular.module('manager-display', ['UsersToManagers']);

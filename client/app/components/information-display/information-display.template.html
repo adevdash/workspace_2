@@ -2,11 +2,17 @@
 <div style="margin-top: 5px" ng-hide="$ctrl.isDummyNode()">
   <uib-accordion>
     <uib-accordion-group heading="General Status">
-
+      <p>Status</p>
     </uib-accordion-group>
+
+
+
     <uib-accordion-group heading="Channels">
-
+      <p>Channels</p>
     </uib-accordion-group>
+
+
+
     <uib-accordion-group heading="Faces">
       <ul ng-repeat="face in node.content.faces">
         <li>
@@ -37,9 +43,10 @@
       </div>
 
     </uib-accordion-group>
+
+
+
     <uib-accordion-group heading="FIB">
-
-
       <hr />
       <div ng-controller="FibControllerCtrl">
         <button type="button" class="btn btn-default" ng-click="newNextHopForm = !newNextHopForm">
@@ -59,35 +66,53 @@
         </div>
       </div>
     </uib-accordion-group>
+
+
+
     <uib-accordion-group heading="RIB">
+      <!-- List RIB entries -->
 
 
+      <!-- Create new route for RIB entry -->
       <hr />
-      <div ng-controller="FaceControllerCtrl">
-        <button type="button" class="btn btn-default" ng-click="newFaceForm = !newFaceForm">
-          New face
+      <div ng-controller="RibControllerCtrl">
+        <button type="button" class="btn btn-default" ng-click="ribFormHidden = !ribFormHidden">
+          New route
         </button>
-        <div uib-collapse="newFaceForm">
+        <div uib-collapse="ribFormHidden">
           <div class="well well-lg" style="margin-top: 5px">
-            <input type="text" ng-model="newFaceUri" class="form-control" placeholder="Face URI">
-            <input type="text" ng-model="newFaceId" class="form-control" placeholder="Face ID"
+            <input type="text" ng-model="prefix" class="form-control" placeholder="Prefix">
+            <input type="text" ng-model="origin" class="form-control" placeholder="Origin"
                    style="margin-top: 5px">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="newFacePermanent"> Permanent
-              </label>
+            <input type="text" ng-model="cost" class="form-control" placeholder="Cost"
+                   style="margin-top: 5px">
+
+            <div class="btn-group" uib-dropdown is-open="flagDropdownStatus.isOpen" style="margin-top: 5px">
+              <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                {{flagSelection}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem" ng-click="flagSelection = 'CHILD_INHERIT'"><a href="#">CHILD_INHERIT</a></li>
+                <li role="menuitem" ng-click="flagSelection = 'CAPTURE'"><a href="#">CAPTURE</a></li>
+              </ul>
             </div>
-            <button type="button" class="btn btn-primary" ng-click="createFace()">
-              Create face
+
+            <div class="input-group" style="margin-top: 5px">
+              <input type="text" ng-model="expirationPeriod" class="form-control" placeholder="Expiration period"
+                     uib-popover="Enter '0' for no expiration"  popover-trigger="focus">
+              <span class="input-group-addon">ms</span>
+            </div>
+            <button type="button" class="btn btn-primary" ng-click="createRoute()" style="margin-top: 5px;">
+              Create route
             </button>
           </div>
         </div>
       </div>
     </uib-accordion-group>
+
+
+
     <uib-accordion-group heading="Forwarding Strategy">
-
-
-
     </uib-accordion-group>
   </uib-accordion>
 </div>
