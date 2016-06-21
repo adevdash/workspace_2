@@ -34,12 +34,10 @@ angular.module('manager-display')
         Object.assign($scope.nodeChoice, node);
       }
       $scope.updateNodeChoice = function(node){
-        $scope.nodeChoice = {name: node.name, _id: node._id}
-        console.log('function called');
+        $scope.nodeChoice = {name: node.name, _id: node._id};
       }
       $scope.clearNodeChoice = function(){
         $scope.nodeChoice = {name: ''};
-        console.log('IT WAS THE SUMMER OF SIXTY NINE');
       }
     }
 });
