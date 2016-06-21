@@ -2,39 +2,56 @@
 <div style="margin-top: 5px" ng-hide="$ctrl.isDummyNode()">
   <uib-accordion>
     <uib-accordion-group heading="General Status">
+      <!-- status -->
       <p>Status</p>
     </uib-accordion-group>
 
 
 
     <uib-accordion-group heading="Channels">
+      <!-- list of channels -->
       <p>Channels</p>
     </uib-accordion-group>
 
 
 
     <uib-accordion-group heading="Faces">
+      <!-- list of faces -->
+      <p>These aren't the actual faces, I misunderstood what faces were, so have some misinformation:</p>
+      <hr />
       <ul ng-repeat="face in node.content.faces">
         <li>
-          {{(face | IdToNode:nodes.content).name}}
+          {{(face | IdToNode).name}}
         </li>
       </ul>
 
-      <hr />
-      <div ng-controller="FaceControllerCtrl">
+
+      <!-- form to create new face -->
+      <div ng-controller="FaceControllerCtrl" ng-show="isLoggedIn()">
+        <hr />
+
+        <!-- button to expand form -->
         <button type="button" class="btn btn-default" ng-click="newFaceForm = !newFaceForm">
           New face
         </button>
+
+        <!-- the form -->
         <div uib-collapse="newFaceForm">
           <div class="well well-lg" style="margin-top: 5px">
+
+            <!-- some text fields -->
             <input type="text" ng-model="newFaceUri" class="form-control" placeholder="Face URI">
             <input type="text" ng-model="newFaceId" class="form-control" placeholder="Face ID"
                    style="margin-top: 5px">
+
+            <!-- a checkbox for one of the fields -->
             <div class="checkbox">
               <label>
                 <input type="checkbox" ng-model="newFacePermanent"> Permanent
               </label>
             </div>
+
+            <!-- the submit button -->
             <button type="button" class="btn btn-primary" ng-click="createFace()">
               Create face
             </button>
@@ -47,18 +64,30 @@
 
 
     <uib-accordion-group heading="FIB">
-      <hr />
-      <div ng-controller="FibControllerCtrl">
+      <!-- List FIB entries -->
+
+
+      <!-- form to create new FIB entry -->
+      <div ng-controller="FibControllerCtrl" ng-show="isLoggedIn()">
+        <hr />
+
+        <!-- button to expand form -->
         <button type="button" class="btn btn-default" ng-click="newNextHopForm = !newNextHopForm">
           New nexthop
         </button>
+
+        <!-- the form -->
         <div uib-collapse="newNextHopForm">
           <div class="well well-lg" style="margin-top: 5px">
+
+            <!-- some text input fields -->
             <input type="text" ng-model="newNextHopPath" class="form-control" placeholder="Path">
             <input type="text" ng-model="newNextHopFaceId" class="form-control" placeholder="Face ID"
                    style="margin-top: 5px">
             <input type="text" ng-model="newNextHopCost" class="form-control" placeholder="Cost"
                    style="margin-top: 5px">
+
+            <!-- submit button -->
             <button type="button" class="btn btn-primary" ng-click="createNextHop()" style="margin-top: 5px">
               Create nexthop
             </button>
@@ -74,8 +103,9 @@
 
 
       <!-- Create new route for RIB entry -->
-      <hr />
-      <div ng-controller="RibControllerCtrl">
+      <div ng-controller="RibControllerCtrl" ng-show="isLoggedIn()">
+        <hr />
+
         <!-- button to expand the form -->
         <button type="button" class="btn btn-default" ng-click="ribFormHidden = !ribFormHidden">
           New route

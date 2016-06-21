@@ -98,6 +98,8 @@ User.find({}).remove()
       User.findOne({name: 'Manager'}, function(err, user){
         if(err) return handleError(err);
         user.nodes.push(node1._id, node3._id);
+        user.save();
+        console.log(user);
       });
       User.find({}, function(err, users){
         if(err) return handleError(err);

@@ -14,3 +14,11 @@
     </div>
   </div>
 </div>
+
+<uib-accordion ng-repeat="manager in managers">
+  <uib-accordion-group heading="{{manager.name}}">
+    <ul ng-repeat="nodeId in manager.nodes">
+      <li>{{(nodeId | IdToNode).name}}</li>
+    </ul>
+  </uib-accordion-group>
+</uib-accordion>

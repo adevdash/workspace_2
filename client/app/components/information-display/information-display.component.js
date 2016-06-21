@@ -9,6 +9,8 @@ angular.module('informationDisplay')
       $scope.nodes = NodeDataFactory.node_list;
       $scope.network = NodeDataFactory.net;
 
+      $scope.isLoggedIn = Auth.isLoggedIn;
+
       this.isDummyNode = function(){
         return $scope.node.content.hasOwnProperty('karmaPolice')
       }
