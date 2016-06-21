@@ -34,7 +34,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
     var forceWr = [];
 
     var heightWr = [], widthWr = [];
-    var tickFunctionWr = [];
 
 
     // Service logic
@@ -236,9 +235,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
       setHeightWidth: function(width, height){
         widthWr.content = width;
         heightWr.content = height;
-      },
-      setTickFunction: function(tickFxn){
-        tickFunctionWr.content = tickFxn;
       },
 
       node: currNodeWr,

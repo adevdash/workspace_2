@@ -1,5 +1,5 @@
-<h1>Manager Display</h1>
-
+<!-- list of managers (non-accordion -->
+<!--
 <div class="container">
   <div class="row">
     <div class="col-lg-4">
@@ -13,12 +13,38 @@
       </ul>
     </div>
   </div>
-</div>
+</div>-->
 
+
+<!-- have to add something that clears the node selection -->
+<!-- also just noticed that the node returned is wrong -->
+<!-- Accordion list of managers -->
 <uib-accordion ng-repeat="manager in managers">
-  <uib-accordion-group heading="{{manager.name}}">
-    <ul ng-repeat="nodeId in manager.nodes">
-      <li>{{(nodeId | IdToNode).name}}</li>
+  <uib-accordion-group style="margin-top: 5px; overflow: visible">
+    <uib-accordion-heading>{{manager.name}}</uib-accordion-heading>
+
+    <!-- List of nodes the manager controls -->
+    <ul ng-repeat="nodeId in manager.nodes" class="nav nav-tabs nav-stacked">
+      <li>
+        <a href="#">
+          {{(nodeId | IdToNode).name}}
+          <button type="button" class="close" ng-click="deleteManager(manager)">&times;</button>
+        </a>
+      </li>
     </ul>
+
+    <!-- Split button -->
+    <div class="btn-group" uib-dropdown style="margin-top: 5px;">
+      <button id="split-button" type="button" class="btn btn-primary" ng-click="addNode(manager, nodeChoice)">Add</button>
+      <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+        {{nodeChoice.name}}
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button"
+          ng-repeat="node in (manager.nodes | RemainingNodes)">
+        <li role="menuitem"><a href="#" ng-click="updateNodeChoice(node)">{{node.name}}</a></li>
+      </ul>
+    </div>
   </uib-accordion-group>
 </uib-accordion>

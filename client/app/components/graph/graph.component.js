@@ -8,7 +8,6 @@ angular.module('graph')
 
       this.network = NodeDataFactory.net;
       this.nodes = NodeDataFactory.restricted_node_list;
-      this.formattedNodes = NodeDataFactory.formatted_nodes;
       this.force = NodeDataFactory.force;
 
       // In the future it may be better to rework it from
@@ -21,11 +20,11 @@ angular.module('graph')
       $scope.width = 600;
       $scope.height = 600;
       NodeDataFactory.setHeightWidth($scope.width, $scope.height);
-      NodeDataFactory.setTickFunction($scope.$apply);
 
       $scope.nodes = NodeDataFactory.graph_nodes_wr;
       $scope.links = NodeDataFactory.graph_links_wr;
 
+      $scope.currentNode = NodeDataFactory.node;
 
       // Alright, let's see what we need here:
       // Need all the nodes in the network, (check)
@@ -38,6 +37,12 @@ angular.module('graph')
       }
       $scope.getNodeData = function(node_id){
         return NodeDataFactory.getNodeData(node_id);
+      }
+
+      $scope.blackOrWhite = function(node){
+        console.log(node._id);
+        console.log($scope.currentNode._id);
+        return (node._id == $scope.currentNode._id ? "black" : "white");
       }
     }
 });

@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('manager-display', ['UsersToManagers', 'IdToNode']);
+angular.module('manager-display', ['UsersToManagers', 'IdToNode', 'RemainingNodes']);

@@ -47,10 +47,10 @@
         <title>{{node.name}}</title>
       </circle>
       <text ng-repeat="node in nodes.content"
-            ng-attr-x="{{node.x + 8}}"
-            ng-attr-y="{{node.y - 8}}"
+            ng-attr-x="{{node.x + 9}}"
+            ng-attr-y="{{node.y - 9}}"
             ng-click="onMouseClick(node)"
-            font-size="10">
+            font-size="12">
         <a href="#">{{node.name}}</a>
       </text>
     </svg>
