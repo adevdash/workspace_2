@@ -8,6 +8,8 @@ angular.module('manager-display')
       this.message = 'World'
       $scope.managers = [];
 
+
+
       $http.get('api/users/')
         .then(response => {
           $scope.managers = $filter('UsersToManagers')(response.data);
@@ -15,5 +17,9 @@ angular.module('manager-display')
           console.log('Error retrieving users');
           console.log(err.data);
         })
+
+      $scope.deleteManager = function(manager){
+        
+      }
     }
 });

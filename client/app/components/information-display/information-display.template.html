@@ -76,17 +76,23 @@
       <!-- Create new route for RIB entry -->
       <hr />
       <div ng-controller="RibControllerCtrl">
+        <!-- button to expand the form -->
         <button type="button" class="btn btn-default" ng-click="ribFormHidden = !ribFormHidden">
           New route
         </button>
+
+        <!-- the form -->
         <div uib-collapse="ribFormHidden">
           <div class="well well-lg" style="margin-top: 5px">
+
+            <!-- some input fields -->
             <input type="text" ng-model="prefix" class="form-control" placeholder="Prefix">
             <input type="text" ng-model="origin" class="form-control" placeholder="Origin"
                    style="margin-top: 5px">
             <input type="text" ng-model="cost" class="form-control" placeholder="Cost"
                    style="margin-top: 5px">
 
+            <!-- dropdown for 'flags' select -->
             <div class="btn-group" uib-dropdown is-open="flagDropdownStatus.isOpen" style="margin-top: 5px">
               <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
                 {{flagSelection}} <span class="caret"></span>
@@ -97,6 +103,7 @@
               </ul>
             </div>
 
+            <!-- input field for expiration period -->
             <div class="input-group" style="margin-top: 5px">
               <input type="text" ng-model="expirationPeriod" class="form-control" placeholder="Expiration period"
                      uib-popover="Enter '0' for no expiration"  popover-trigger="focus">
@@ -105,6 +112,7 @@
             <button type="button" class="btn btn-primary" ng-click="createRoute()" style="margin-top: 5px;">
               Create route
             </button>
+
           </div>
         </div>
       </div>
