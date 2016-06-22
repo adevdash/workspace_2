@@ -18,9 +18,6 @@ angular.module('NodeFormat', ['IdToNode'])
         result.nodes[i] = $filter('IdToNode')(topology.nodes[i]);
       }
 
-      console.log(topology.nodes);
-      console.log('result.nodes');
-      console.log(result.nodes);
 
       // Not entirely sure on this part
       for(var i in topology.links){
