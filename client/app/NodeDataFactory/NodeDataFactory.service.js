@@ -175,11 +175,25 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
       forceWr.content = force;
     }
 
+    function load_topology(){
+      $http.get('api/nodes/topology').then(
+        response => {
+          console.log('Topology retrieved');
+          console.log(response.data[0]);
+        },
+        err => {
+          console.log('Error retrieving topology');
+          console.log(err.data);
+        }
+      )
+    }
+
 
     // Public API here
     var serviceObj = {
       extLoadNet: function(new_user){
         userWr.content = new_user;
+        load_topology();
         if(!Auth.isLoggedIn()){
           load_rando_net();
           return;
