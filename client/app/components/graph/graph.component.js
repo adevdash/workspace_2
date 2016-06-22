@@ -4,7 +4,7 @@ angular.module('graph')
   .component('graph', {
     templateUrl: 'app/components/graph/graph.template.html',
     bindings: { message: '<' },
-    controller: function($http, $scope, socket, Auth, NodeDataFactory){//, getNodeData) {
+    controller: function($http, $scope, socket, Auth, NodeDataFactory, GraphingService){//, getNodeData) {
 
       this.network = NodeDataFactory.net;
       this.nodes = NodeDataFactory.restricted_node_list;
@@ -19,10 +19,10 @@ angular.module('graph')
       // Try to do the force-directed graph using AngularJSVG
       $scope.width = 600;
       $scope.height = 600;
-      NodeDataFactory.setHeightWidth($scope.width, $scope.height);
+      GraphingService.setHeightWidth($scope.width, $scope.height);
 
-      $scope.nodes = NodeDataFactory.graph_nodes_wr;
-      $scope.links = NodeDataFactory.graph_links_wr;
+      $scope.nodes = GraphingService.graph_nodes_wr;
+      $scope.links = GraphingService.graph_links_wr;
 
       $scope.currentNode = NodeDataFactory.node;
 

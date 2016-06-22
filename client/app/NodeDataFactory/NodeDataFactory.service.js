@@ -6,8 +6,8 @@
 *
 *
  */
-angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
-  .factory('NodeDataFactory', function ($http, socket, Auth, $filter, $rootScope) {
+angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingService'])
+  .factory('NodeDataFactory', function ($http, socket, Auth, $filter, $rootScope, GraphingService) {
     this.$http = $http;
     this.socket = socket;
 
@@ -27,13 +27,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
       restrictedNodesWr.content = [];
     var formattedNodesWr = [];
       formattedNodesWr.content = [];
-    var graphNodesWr = [];
-      graphNodesWr.content = [];
-    var graphLinksWr = [];
-      graphLinksWr = [];
-    var forceWr = [];
-
-    var heightWr = [], widthWr = [];
 
 
     // Service logic
@@ -76,7 +69,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
           restrictedNodesWr.content = $filter('NodeFilter')(nodesWr.content, networkWr.content.nodes);
-          format_nodes(restrictedNodesWr.content);
+          GraphingService.formatNodes(restrictedNodesWr.content);
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -142,38 +135,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
       });
     }
 
-    // Puts nodes into JSON format
-    function format_nodes(nodes){
-      formattedNodesWr.content = $filter('NodeFormat')(nodes);
-      graphLinksWr.content = formattedNodesWr.content.links;
-      graphNodesWr.content = formattedNodesWr.content.nodes;
-
-      var color = d3.scale.category20()
-      var force = d3.layout.force()
-        .size([widthWr.content, heightWr.content])
-        .linkStrength(0.1)    // 0.1
-        .friction(0.9)        // 0.9
-        .linkDistance(100)     // 30
-        .charge(-600)         // -160
-        .gravity(0.1)         // 0.1
-        .theta(0.8)           // 0.8
-        .alpha(0.1);          // 0.1
-
-      for(var i=0; i < graphLinksWr.content.length ; i++){
-        graphLinksWr.content[i].strokeWidth = Math.round(Math.sqrt(graphLinksWr.content[i].value))
-      }
-      for(var i=0; i < graphNodesWr.content.length ; i++){
-        graphNodesWr.content[i].color = color(i)
-      }
-
-      force
-        .nodes(graphNodesWr.content)
-        .links(graphLinksWr.content)
-        .on("tick", function(){$rootScope.$apply()})
-        .start();
-
-      forceWr.content = force;
-    }
 
     function load_topology(){
       $http.get('api/nodes/topology').then(
@@ -232,20 +193,13 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
         return userWr;
       },
 
-      setHeightWidth: function(width, height){
-        widthWr.content = width;
-        heightWr.content = height;
-      },
 
       node: currNodeWr,
       net: networkWr,
       node_list: nodesWr,
       nodeId_list: nodeIdsWr,
       restricted_node_list: restrictedNodesWr,
-      formatted_nodes: formattedNodesWr,
-      graph_nodes_wr: graphNodesWr,
-      graph_links_wr: graphLinksWr,
-      force: forceWr
+      formatted_nodes: formattedNodesWr
     };
     return serviceObj;
   });

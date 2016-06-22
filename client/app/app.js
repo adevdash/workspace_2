@@ -21,7 +21,8 @@ angular.module('workspace2App', [
   'ngAria',
   'nlsr-display',
   'manager-display',
-  'nodeTitle'
+  'nodeTitle',
+  'GraphingService'
 ]).config(
   function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
