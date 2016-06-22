@@ -9,7 +9,6 @@ angular.module('GraphingService', ['NodeFormat'])
     var forceWr = [];
 
 
-
     // Puts nodes into JSON format
     function format_nodes(nodes){
       formattedNodesWr.content = $filter('NodeFormat')(nodes);
@@ -42,9 +41,6 @@ angular.module('GraphingService', ['NodeFormat'])
 
       forceWr.content = force;
     }
-
-
-
 
 
 

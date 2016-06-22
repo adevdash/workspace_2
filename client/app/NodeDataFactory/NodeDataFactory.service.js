@@ -69,7 +69,8 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
           restrictedNodesWr.content = $filter('NodeFilter')(nodesWr.content, networkWr.content.nodes);
-          GraphingService.formatNodes(restrictedNodesWr.content);
+          //GraphingService.formatNodes(restrictedNodesWr.content);
+          load_topology();
           cb(response);
         }, err => {
           console.log('Error retrieving all nodes');
@@ -141,6 +142,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
         response => {
           console.log('Topology retrieved');
           console.log(response.data[0]);
+          GraphingService.formatNodes(response.data[0]);
         },
         err => {
           console.log('Error retrieving topology');
@@ -154,7 +156,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
     var serviceObj = {
       extLoadNet: function(new_user){
         userWr.content = new_user;
-        load_topology();
         if(!Auth.isLoggedIn()){
           load_rando_net();
           return;
