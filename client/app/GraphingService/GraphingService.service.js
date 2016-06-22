@@ -10,8 +10,8 @@ angular.module('GraphingService', ['NodeFormat'])
 
 
     // Puts nodes into JSON format
-    function format_nodes(nodes){
-      formattedNodesWr.content = $filter('NodeFormat')(nodes);
+    function format_nodes(topology){
+      formattedNodesWr.content = $filter('NodeFormat')(topology);
       graphLinksWr.content = formattedNodesWr.content.links;
       graphNodesWr.content = formattedNodesWr.content.nodes;
 

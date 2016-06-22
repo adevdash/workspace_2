@@ -18,8 +18,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
     var nodeIdsWr = [];
     var nodesWr = [];
       nodesWr.content = [];
-    var networksWr = [];
-    var networkWr = [];
     var currNodeWr = [];
       currNodeWr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'};
       // dummy initial node                       // field so we know it's dummy
@@ -31,45 +29,12 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
 
     // Service logic
     // ...
-    // Load all networks
-    function load_nets(cb){
-      $http.get('api/networks/')
-        .then(response => {
-          console.log('All networks retrieved');
-          networksWr.content = response.data;
-          cb();
-        }, err => {
-          console.log('Error retrieving all networks');
-          console.log(err.data);
-          //handleError(err);
-        });
-    }
-    // Load one network based on user
-    function load_net(net_id){
-      $http.get('api/networks/' + net_id)
-        .then(response => {
-          console.log('User\'s network retrieved');
-          networkWr.content = response.data;
-          //console.log(networkWr);
-          nodeIdsWr.content = networkWr.content.nodes;
-          load_nodes(function(response){
-
-          });
-        }, err => {
-          console.log('Error retrieving user\'s network');
-          console.log(err.data);
-          //handleError(err);
-        });
-    }
     // Load further node content into nodesWr
     function load_nodes(cb){
       return $http.get('api/nodes/')
         .then(response => {
-          //console.log(response);
           console.log('All nodes retrieved');
           nodesWr.content = response.data;
-          restrictedNodesWr.content = $filter('NodeFilter')(nodesWr.content, networkWr.content.nodes);
-          //GraphingService.formatNodes(restrictedNodesWr.content);
           load_topology();
           cb(response);
         }, err => {
@@ -79,16 +44,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
     }
 
 
-    // Load rando network
-    function load_rando_net(){
-      load_nets(function(){
-        //console.log('Num networks: ' + networksWr.content.length);
-        //console.log(networksWr);
-        networkWr.content = networksWr.content[Math.floor(Math.random() * networksWr.content.length)];
-        nodeIdsWr.content = networkWr.content.nodes;
-        load_nodes(function(response){});
-      });
-    }
     // Load one node based on id
     function load_node(node_id, cb){
       $http.get('api/nodes/' + node_id)
@@ -156,11 +111,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
     var serviceObj = {
       extLoadNet: function(new_user){
         userWr.content = new_user;
-        if(!Auth.isLoggedIn()){
-          load_rando_net();
-          return;
-        }
-        load_net(userWr.content.network);
+        load_nodes(function(){});
       },
 
       getNodeList: function(){
@@ -179,14 +130,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
       getNode: function(){
         return currNodeWr;
       },
-
-      setNets: function(new_networks){
-        networksWr = new_networks;
-      },
-      getNets: function(){
-        return networksWr;
-      },
-
       setUser: function(new_user){
         userWr = new_user;
       },
@@ -196,7 +139,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
 
 
       node: currNodeWr,
-      net: networkWr,
       node_list: nodesWr,
       nodeId_list: nodeIdsWr,
       restricted_node_list: restrictedNodesWr,
