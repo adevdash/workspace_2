@@ -21,8 +21,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
     var currNodeWr = [];
       currNodeWr.content = {info: 'Initial data', karmaPolice: 'arrest this girl'};
       // dummy initial node                       // field so we know it's dummy
-    var restrictedNodesWr = [];
-      restrictedNodesWr.content = [];
     var formattedNodesWr = [];
       formattedNodesWr.content = [];
 
@@ -141,7 +139,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
       node: currNodeWr,
       node_list: nodesWr,
       nodeId_list: nodeIdsWr,
-      restricted_node_list: restrictedNodesWr,
       formatted_nodes: formattedNodesWr
     };
     return serviceObj;
