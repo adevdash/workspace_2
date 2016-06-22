@@ -185,7 +185,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
           console.log('Error retrieving topology');
           console.log(err.data);
         }
-      )
+      );
     }
 
 
