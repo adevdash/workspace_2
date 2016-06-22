@@ -28,7 +28,7 @@
     <!-- List of nodes the manager controls with a delete button for each-->
     <ul ng-repeat="nodeId in manager.nodes" class="nav nav-tabs nav-stacked">
       <li>
-        <a href="#">
+        <a href="#" ng-click="setCurNode((nodeId | IdToNode));">
           {{(nodeId | IdToNode).name}}
           <button type="button" class="close" ng-click="deleteNode(manager)">&times;</button>
         </a>
@@ -37,15 +37,16 @@
 
     <!-- Split button -->
     <div class="btn-group" uib-dropdown style="margin-top: 5px;">
-      <button id="split-button" type="button" class="btn btn-primary" ng-click="addNode(manager, nodeChoice)">Add</button>
+      <button id="split-button" type="button" class="btn btn-primary"
+              ng-click="addNode(manager, curNode.content)" ng-disabled="(manager.nodes).indexOf(curNode.content._id) != -1">Add</button>
       <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-        {{nodeChoice.name}}
+        {{curNode.content.name}}
         <span class="caret"></span>
         <span class="sr-only">Split button!</span>
       </button>
       <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button"
           ng-repeat="node in (manager.nodes | RemainingNodes)">
-        <li role="menuitem"><a href="#" ng-click="updateNodeChoice(node)">{{node.name}}</a></li>
+        <li role="menuitem"><a href="#" ng-click="setCurNode(node)">{{node.name}}</a></li>
       </ul>
     </div>
   </uib-accordion-group>
