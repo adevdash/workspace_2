@@ -92,7 +92,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat', 'GraphingSe
       $http.get('api/nodes/topology').then(
         response => {
           console.log('Topology retrieved');
-          console.log(response.data[0]);
           GraphingService.formatNodes(response.data[0]);
         },
         err => {

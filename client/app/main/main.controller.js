@@ -21,6 +21,10 @@
       Auth.getCurrentUser(function(user){
         NodeDataFactory.extLoadNet(user);
       })
+      // After the user is authenticated (or not), NodeDataFactory (henceforth
+      // referred to as NDF) conducts http requests for the entire list of nodes
+      // and the topology. It sends the topology to the Graphing Service, which
+      // then sends the graph thing to the... graph, thing. Anyway. (Y)
 
       // I don't really know what this does
       $scope.$on('$destroy', function() {
@@ -28,17 +32,7 @@
       });
     }
 
-    // Deciding which components are displayed based on the radio button arrays
-    matchesRadioButton(direction){
-      return this.scope.radioModel == direction;
-    }
-    setInfoRadioButton(direction){
-      this.scope.infoRadioModel = direction;
-    }
-    matchesInfoRadioButton(direction){
-      return this.scope.infoRadioModel == direction;
-    }
-
+    // I don't know what this is for.
     $onInit() {
 
     }
