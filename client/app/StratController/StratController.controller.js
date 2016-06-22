@@ -2,5 +2,8 @@
 
 angular.module('informationDisplay')
   .controller('StratControllerCtrl', function ($scope) {
-    $scope.message = 'Hello';
+    $scope.currentStrat = '';
+    $scope.allStrats = [];
+
+    
   });

@@ -1,21 +1,3 @@
-<!-- list of managers (non-accordion -->
-<!--
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4">
-      <ul ng-repeat="manager in managers" class="nav nav-tabs nav-stacked">
-        <li>
-          <a href="#" ng-click="managerNodesHidden = !managerNodesHidden">{{manager.name}}
-                      <button type="button" class="close" ng-click="deleteManager(manager)">&times;</button>
-          </a>
-
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>-->
-
-
 <!-- Accordion list of managers -->
 <uib-accordion ng-repeat="manager in managers">
   <uib-accordion-group style="margin-top: 5px; overflow: visible">

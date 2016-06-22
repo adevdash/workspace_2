@@ -1,1 +1,7 @@
-<h1>NLSR Display</h1>
+<div class="panel panel-default" style="margin-top: 5px;" ng-hide="isDummyNode()">
+  <div class="panel-body">
+    <ul ng-repeat="name in names">
+      <li>{{name}}&nbsp;{{curNode.content.name}}</li>
+    </ul>
+  </div>
+</div>

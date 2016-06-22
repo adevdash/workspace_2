@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('nlsr-display', []);
+angular.module('nlsr-display', ['NodeDataFactory']);
