@@ -20,17 +20,15 @@ angular.module('informationDisplay')
 
     setDefaults();
 
-    $scope.createRoute = function(){
-      if($scope.flagSelection == 'Flags' || $scope.flagSelection == 'CHILD_INHERIT'){
-        $scope.flagSelection = 1;
+    $scope.createRoute = function() {
+      if ($scope.prefix && $scope.origin && $scope.cost) {
+        if ($scope.flagSelection == 'Flags' || $scope.flagSelection == 'CHILD_INHERIT') {
+          $scope.flagSelection = 1;
+        }
+        else {
+          $scope.flagSelection = 2;
+        }
       }
-      else{
-        $scope.flagSelection = 2;
-      }
-
-      
-
-
       setDefaults();
     }
 

@@ -8,6 +8,8 @@ import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Node from '../api/node/node.model';
 import Network from '../api/network/network.model';
+import Topology from '../api/topology/topology.model';
+
 
 Thing.find({}).remove()
   .then(() => {
@@ -42,9 +44,6 @@ Thing.find({}).remove()
   });
 
 var node1, node2, node3;
-//node1 = new Node({name: 'Node 1', info: 'Test node 1', active: true});
-//node2 = new Node({name: 'Node 2', info: 'Test node 2', active: true});
-//node3 = new Node({name: 'Node 3', info: 'Test node 3', active: true});
 Node.find({}).remove()
   .then(() => {
     node1 = new Node({name: 'Node 1', info: 'Test node 1', active: true});
@@ -56,13 +55,23 @@ Node.find({}).remove()
     node1.save();
     node2.save();
     node3.save();
-    //console.log(node1);
-    //Node.create(node1, node2, node3);
-  });
+  }).then(() => {
+    Topology.find().remove().then(() => {
+      var t1 = new Topology();
 
-var net1;// = new Network({name: 'Network 1', info: 'Test network 1'});
-Network.find({}).remove()
-  .then(() => {
+      Node.find({}, function(err, nodes){
+        for(var i in nodes){
+          t1.nodes.push(nodes[i]);
+        }
+        t1.links.push({source: nodes[0].name, target: nodes[1].name},
+                      {source: nodes[1].name, target: nodes[2].name});
+        t1.save();
+        console.log(t1);
+      });
+    });
+}).then(() => {
+  Network.find({}).remove().then(() => {
+    var net1;
     net1 = new Network({name: 'Network 1', info: 'Test network 1'});
     net1.nodes.push(node1, node2, node3);
     //console.log(net1);
@@ -73,47 +82,49 @@ Network.find({}).remove()
     //console.log(Node.findOne({_id: net1.nodes[0]}));
     net1.save();
   });
-
-User.find({}).remove()
-  .then(() => {
-    User.create({
-      provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'test',
-    }, {
-      provider: 'local',
-      role: 'manager',
-      name: 'Manager',
-      email: 'manager@example.com',
-      password: 'manager'
-    },{
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: 'admin'
-    })
+}).then(() => {
+  User.find({}).remove()
     .then(() => {
-      User.findOne({name: 'Manager'}, function(err, user){
-        if(err) return handleError(err);
-        user.nodes.push(node1._id, node3._id);
-        user.save();
-        console.log(user);
-      });
-      User.find({}, function(err, users){
-        if(err) return handleError(err);
-        for(var i in users){
-          //console.log(users[i]);
-          //console.log(net1._id);
-          users[i].network = net1._id;
-          users[i].save();
-          //console.log(users[i]);
-        }
-      });
+      User.create({
+        provider: 'local',
+        name: 'Test User',
+        email: 'test@example.com',
+        password: 'test',
+      }, {
+        provider: 'local',
+        role: 'manager',
+        name: 'Manager',
+        email: 'manager@example.com',
+        password: 'manager'
+      },{
+        provider: 'local',
+        role: 'admin',
+        name: 'Admin',
+        email: 'admin@example.com',
+        password: 'admin'
+      })
+        .then(() => {
+          User.findOne({name: 'Manager'}, function(err, user){
+            if(err) return handleError(err);
+            user.nodes.push(node1._id, node3._id);
+            user.save();
+            console.log(user);
+          });
+          Network.find({}, function(err, nets){
+            User.find({}, function(err, users){
+              if(err) return handleError(err);
+              for(var i in users){
+                //console.log(users[i]);
+                //console.log(net1._id);
+                users[i].network = nets[0]._id;
+                users[i].save();
+                //console.log(users[i]);
+              }
+            });
+          });
 
-      console.log('finished populating users.');
+
+          console.log('finished populating users.');
+        });
     });
-  });
-
-
+});

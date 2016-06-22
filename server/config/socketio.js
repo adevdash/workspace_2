@@ -17,6 +17,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/topology/topology.socket').register(socket);
   require('../api/network/network.socket').register(socket);
   require('../api/nfd/nfd.socket').register(socket);
   require('../api/node/node.socket').register(socket);

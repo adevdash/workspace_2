@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/nodes/topology', require('./api/topology'));
   app.use('/api/networks', require('./api/network'));
   app.use('/api/nfds', require('./api/nfd'));
   app.use('/api/nodes', require('./api/node'));

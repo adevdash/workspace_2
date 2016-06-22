@@ -109,6 +109,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
 
 
     // Update prototype node info
+    // Use this as example for 'put' requests
     function update_node(new_info, cb){
       var new_node = currNodeWr.content;
       new_node.info = new_info;
@@ -183,7 +184,6 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
           load_rando_net();
           return;
         }
-        //console.log(userWr.content.network);
         load_net(userWr.content.network);
       },
 
@@ -196,6 +196,7 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
         socket.syncUpdates('node', nodes, cb);
       },
 
+      // Should call function that does http requests of all the relevant info
       setNode: function(node){
         currNodeWr.content = node;
       },
@@ -210,26 +211,11 @@ angular.module('NodeDataFactory', ['NodeFilterModule', 'NodeFormat'])
         return networksWr;
       },
 
-      setCurNet: function(){
-
-      },
-      getCurNet: function(){
-        return networkWr;
-      },
-
       setUser: function(new_user){
         userWr = new_user;
       },
       getUser: function(){
         return userWr;
-      },
-
-      updateNodeInfo: function(new_info, cb){
-        update_node(new_info, cb);
-      },
-
-      getNodeData: function(node_id){
-
       },
 
       setHeightWidth: function(width, height){
